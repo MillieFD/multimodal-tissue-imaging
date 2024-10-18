@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (multimodal-tissue-imaging)" project-jdk-type="Python SDK" />
+  <component name="Black">
+    <option name="sdkName" value="Remote Python 3.10.14 (sftp://torizon@100.113.161.41:22/home/torizon/.virtualenvs/multimodal-tissue-imaging/bin/python)" />
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="Remote Python 3.10.14 (sftp://torizon@100.113.161.41:22/home/torizon/.virtualenvs/multimodal-tissue-imaging/bin/python)" project-jdk-type="Python SDK" />
 </project>
