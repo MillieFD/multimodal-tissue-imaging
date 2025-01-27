@@ -1,7 +1,7 @@
 # import asyncio
 # import thormotion
 
-from MEDAQLib import MEDAQLib, ME_SENSOR, ERR_CODE
+from MEDAQLib import MEDAQLib, SENSOR_TYPE, ERR_CODE
 
 TARGET_SERIAL_NUMBER = "27266788"
 
@@ -32,14 +32,14 @@ if __name__ == '__main__':
 
     # -------------------------------------------
 
-    confocal = MEDAQLib.CreateSensorInstance(ME_SENSOR.SENSOR_IFD2421)
+    confocal = MEDAQLib.CreateSensorInstance(SENSOR_TYPE.SENSOR_IFD2421)
     confocal.SetParameterString("IP_Interface", "TCP/IP")
     confocal.SetParameterString("IP_RemoteAddr", "169.254.168.150")
     # confocal.SetParameterInt("IP_EnableLogging", 1)
 
     confocal.OpenSensor()
 
-    if confocal.GetLastError() == ERR_CODE.ERR_NOERROR:
+    if confocal.GetLastError() == ERR_CODE.NO_ERROR:
         print("Successfully opened sensor instance")
         data = confocal.Poll(1)
         print("raw: {}, scaled: {}".format(data[0], data[1]))

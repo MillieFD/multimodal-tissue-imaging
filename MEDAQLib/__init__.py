@@ -20,7 +20,7 @@ class MEDAQLibException(Exception):
         return "Calling function {0} returned {1} ({2})".format(self.functionName, self.iRet, buffer.value)
 
 
-class ME_SENSOR(enum.IntEnum):
+class SENSOR_TYPE(enum.IntEnum):
     """sensor constants from MEDAQLib.h
 
     """
@@ -74,7 +74,7 @@ class ME_SENSOR(enum.IntEnum):
     SENSOR_ACS7000 = 35  # colorCONTROL
     SENSOR_CFO = 53  # colorSENSOR
     SENSOR_MFA = 61  # colorCONTROL
-    MULTI_SENSOR = 57  # Container for synchronized data aquisition of multiple sensors
+    MULTI_SENSOR = 57  # Container for synchronized data acquisition of multiple sensors
     NUMBER_OF_SENSORS = 72
 
 
@@ -83,8 +83,8 @@ class ERR_CODE(enum.IntEnum):
 
     """
 
-    ERR_NOERROR = 0
-    ERR_FUNTION_NOT_SUPPORTED = -1
+    NO_ERROR = 0
+    ERR_FUNCTION_NOT_SUPPORTED = -1
     ERR_CANNOT_OPEN = -2
     ERR_NOT_OPEN = -3
     ERR_APPLYING_PARAMS = -4
@@ -102,12 +102,12 @@ class ERR_CODE(enum.IntEnum):
     ERR_SENSOR_ANSWER_ERROR = -16
     ERR_SENSOR_ANSWER_TOO_SHORT = -17
     ERR_WRONG_PARAMETER = -18
-    ERR_NOMEMORY = -19
+    ERR_NO_MEMORY = -19
     ERR_NO_ANSWER_RECEIVED = -20
     ERR_SENSOR_ANSWER_DOES_NOT_MATCH_COMMAND = -21
-    ERR_BAUDRATE_TOO_LOW = -22
+    ERR_BAUD_RATE_TOO_LOW = -22
     ERR_OVERFLOW = -23
-    ERR_INSTANCE_NOT_EXTST = -24
+    ERR_INSTANCE_NOT_EXIST = -24
     ERR_NOT_FOUND = -25
     ERR_WARNING = -26
     ERR_SENSOR_ANSWER_WARNING = -27
@@ -160,7 +160,7 @@ class MEDAQLib:
 
     @staticmethod
     def CreateSensorInstByName(sensorName):
-        """Creates an instance of the specified sensor driver by it's sensor name
+        """Creates an instance of the specified sensor driver by its sensor name
             and returns an index greater 0. If the function fails, 0 is returned.
 
         :param sensorName: sensor name
@@ -174,7 +174,7 @@ class MEDAQLib:
 
     # tested Ok.
     def GetDLLVersion(self):
-        """Retrievs the version of the MEDAQLib dll.
+        """Retrieves the version of the MEDAQLib dll.
         The version is stored in versionStr and is limited to length of maxLen (should be at least 64 bytes)
 
         :return: dll-version
@@ -208,7 +208,7 @@ class MEDAQLib:
 
     # tested OK
     def SetParameterDouble(self, paramName, paramValue):
-        """Specifies a 8 Byte double parameter for a OpenSensor- or SensorCommand-function call.
+        """Specifies an 8 Byte double parameter for a OpenSensor- or SensorCommand-function call.
 
         :param paramName: Name of the parameter as string
         :param paramValue: Value of the parameter
@@ -242,7 +242,7 @@ class MEDAQLib:
         self._last_error = self._set_parameter_binary_org(self.iSensor, bytes(paramName, "utf8"),
                                                           param_value, c_uint32(len_buffer))
 
-    # testet OK.
+    # tested OK.
     def SetParameters(self, parameter_list):
         """Sets a list of parameters at once
 
@@ -283,12 +283,12 @@ class MEDAQLib:
         self._last_error = self._get_parameter_double_org(self.iSensor, bytes(paramName, "utf8"), byref(double_val))
         return double_val.value
 
-    # testet OK.
+    # tested OK.
     def GetParameterString(self, paramName, max_len=0, sensor_encoding='cp1252'):
         """Returns a string parameter after calling SensorCommand.
 
         :param paramName: Name of the parameter as string
-        :param max_len: Maximal length of the receive buffer. 0=adapt to length needed to get all information.
+        :param max_len: Maximal length of the receiving buffer. 0=adapt to length needed to get all information.
         :param sensor_encoding: The encoding used by sensor
         :return: string return value
         """
@@ -301,12 +301,12 @@ class MEDAQLib:
                                                           byref(len))
         return str(param_value, sensor_encoding)[:len.value]
 
-    # testet OK.
+    # tested OK.
     def GetParameterBinary(self, paramName, max_len):
         """Returns binary data after calling SensorCommand.
 
         :param paramName: Name of the parameter as string
-        :param max_len: Maximal length of the receive buffer
+        :param max_len: Maximal length of the receiving buffer
         :return: binary return value
         """
         max_buffer_len = c_uint32(max_len)
@@ -315,11 +315,11 @@ class MEDAQLib:
                                                           byref(max_buffer_len))
         return bytearray(param_value)
 
-    # testet OK
+    # tested OK
     def GetParameters(self, max_len=0, sensor_encoding='cp1252'):
         """Get all available Parameters at once
 
-        :param max_len: Maximal length of the receive buffer. 0=adapt to length needed to get all information.
+        :param max_len: Maximal length of the receiving buffer. 0=adapt to length needed to get all information.
         :param sensor_encoding: The encoding used by sensor
         :return: parameter list (name and value separated by an equality sign)
         """
@@ -331,7 +331,7 @@ class MEDAQLib:
         self._last_error = self._get_parameters_org(self.iSensor, param_value, byref(len))
         return str(param_value.raw, sensor_encoding)[:len.value]
 
-    # testet OK
+    # tested OK
     def ClearAllParameters(self):
         """Clears the internal buffer of parameters.
 
@@ -347,7 +347,7 @@ class MEDAQLib:
         """
         self._last_error = self._open_sensor_org(self.iSensor)
 
-    # testet OK.
+    # tested OK.
     def CloseSensor(self):
         """Close the connection to the connected sensor.
 
@@ -355,7 +355,7 @@ class MEDAQLib:
         """
         self._last_error = self._close_sensor_org(self.iSensor)
 
-    # testet OK.
+    # tested OK.
     def ReleaseSensorInstance(self):
         """Free the specific sensor instance
 
@@ -387,22 +387,21 @@ class MEDAQLib:
         """Transfer the data form driver to application.
 
         :param maxValues: Length of rawData and scaledData.
-        :return: a tupel with the raw data, the scaled data and the real number of transfered data values
+        :return: a tuple with the raw data, the scaled data and the real number of transferred data values
         """
         return self._transferdata_helper(maxValues, False)
 
     def TransferDataTs(self, maxValues):
-        """Same as TransferData but with an additional parameter to retrieve times-
-            tamp of data.
+        """Same as TransferData but with an additional parameter to retrieve timestamp of data.
 
         :param maxValues: Length of rawData and scaledData.
-        :return: a tupel with the raw data, the scaled data and the real number of transfered data values, such as the timestamp
+        :return: a tuple with the raw data, the scaled data and the real number of transferred data values, such as the timestamp
         """
         return self._transferdata_helper(maxValues, True)
 
     # tested Ok.
     def Poll(self, maxValues):
-        """Retrievs specified amount of values from Sensor (max. one frame).
+        """Retrieves specified amount of values from Sensor (max. one frame).
 
         :param maxValues: Length of rawData and scaledData.
         :return: a tuple with rawData and scaledData
@@ -419,15 +418,14 @@ class MEDAQLib:
     def GetLastError(self):
         """Returns the return code of the function which was called last
 
-        :return: errorcode of last function
+        :return: error code of last function
         """
         return c_int32(self._last_error).value
 
-    # testet OK.
+    # tested OK.
     def GetError(self, maxLen=1024):
-        """If an error had occured, the error text can be retrieved with GetError.
+        """If an error had occurred, the error text can be retrieved with GetError.
 
-        :param buffer: stringbuffer to get extened error string
         :return: buffer with ErrorCode as string
         """
         len = c_uint32(maxLen)
@@ -443,13 +441,13 @@ class MEDAQLib:
                       logFile="SensorLog-%yyyy-%MM-%hh-%mm-%ss.txt", logAppend=1, logFlush=0, logSplitSize=0):
         """
 
-        :param enableLogging: This paramenter enables or disables logging to file for
-        :param logType: This paramenter specifies the type of messages to log.
-        :param logLevel: This paramenter specifies the kind of event to log.
+        :param enableLogging: This parameter enables or disables logging to file for
+        :param logType: This parameter specifies the type of messages to log.
+        :param logLevel: This parameter specifies the kind of event to log.
         :param logFile: File name of log file.
-        :param logAppend: This paramenter specifies if the logfile should be cleared at
+        :param logAppend: This parameter specifies if the logfile should be cleared at
                             opening or if the new data should be appended to file.
-        :param logFlush: This paramenter specifies if the logfile should be flushed
+        :param logFlush: This parameter specifies if the logfile should be flushed
                         after each output.
         :param logSplitSize: If this parameter is greater than 0, logfile is closed and
                         reopened when this size is reached.
@@ -461,7 +459,7 @@ class MEDAQLib:
     def LogToFile(self, logLevel, location, message, argumentList=""):
         """Add a line to MEDAQLib Logfile.
 
-        :param logLevel: This paramenter specifies the level for the line to log.
+        :param logLevel: This parameter specifies the level for the line to log.
         :param location: Location in source code where the log line is generated. Is
         :param message: Logging message. This parameter can be used at same as
 
@@ -481,13 +479,13 @@ class MEDAQLib:
         self._last_error = self._open_sensor_rs232_org(self.iSensor, bytes(port, "utf8"))
 
     def OpenSensorIF2004_USB(self, deviceInstance, serialNumber, port, channelNumber):
-        """Set the parameters for USB adpater IF2004 before calling OpenSensor.
+        """Set the parameters for USB adapter IF2004 before calling OpenSensor.
 
         :param deviceInstance: Instance number of the USB adapter IF2004.
         :param serialNumber: Serial number of the USB adapter (optional).
         :param port: Name of the serial interface part of USB adapter, e.g.
                     COM1, COM2, ... (optional).
-        :param channelNumber: Channel number on USB adapeter IF2004.
+        :param channelNumber: Channel number on USB adapter IF2004.
         :return: none
         """
         self._last_error = self._open_sensor_if2004_usb_org(self.iSensor, deviceInstance, bytes(serialNumber, "utf8"),
@@ -503,7 +501,7 @@ class MEDAQLib:
         self._last_error = self._open_sensor_if2008_org(self.iSensor, cardNumber, channelNumber)
 
     def OpenSensorTCPIP(self, remoteAddr):
-        """Set the parameters for TCP/IP ethernet interface befor calling OpenSensor
+        """Set the parameters for TCP/IP ethernet interface before calling OpenSensor
 
         :param remoteAddr: IP address of the remote sensor (TCP server).
         :return: none
@@ -552,8 +550,8 @@ class MEDAQLib:
         """Set the sensor command name and a string parameter and executes teh sensor command
 
         :param sensorCommand: Name of the sensor command (used for parameter S_Command)
-        :param paramName: Name of the parameter as string
-        :param paramValue: String value of the parameter
+        :param paramName: Name of the parameter as a string
+        :param paramValue: Value of the parameter as a string
         :return: none
         """
         self._last_error = self._set_string_exec_cmd_org(self.iSensor, bytes(sensorCommand, "utf8"),
@@ -600,7 +598,7 @@ class MEDAQLib:
         """helper method for transferdata and transferdataTS if timestamp == -1 use transferdata else transferdataTS
 
         :param maxValues: maximal number of values to return
-        :return: a tupel with the raw data, the scaled data and the real number of transfered data values
+        :return: a tuple with the raw data, the scaled data and the real number of transferred data values
                 if transfer_data_ts is called the timestamp is appended
         """
         if maxValues >= 0:
