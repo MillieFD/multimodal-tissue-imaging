@@ -138,18 +138,18 @@ class MEDAQLib:
     """
     CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
     if os.name == 'nt':
-        medaq_lib = WinDLL((str(CURRENT_DIR + "/libMEDAQLib.dll")))
-        medaq_lib_cdecl = CDLL((str(CURRENT_DIR + "/libMEDAQLib.dll")))
+        medaq_lib = WinDLL((str(CURRENT_DIR + r"\libMEDAQLib.dll")))
+        medaq_lib_cdecl = CDLL((str(CURRENT_DIR + r"\libMEDAQLib.dll")))
     else:
-        medaq_lib = CDLL((str(CURRENT_DIR + "/libMEDAQLib.so")))
-        medaq_lib_cdecl = CDLL((str(CURRENT_DIR + "/libMEDAQLib.so")))
+        medaq_lib = CDLL((str(CURRENT_DIR + r"/libMEDAQLib.so")))
+        medaq_lib_cdecl = CDLL((str(CURRENT_DIR + r"/libMEDAQLib.so")))
 
     @staticmethod
     def CreateSensorInstance(Sensor):
         """Creates an instance of the specified sensor driver by its sensor constant
            and returns an index greater 0. If the function fails, 0 is returned.
 
-        :param Sensor: sensor constant
+        :param Sensor: sensor constant given by SENSOR_TYPE.
         :return: sensor index
         """
         CreateSensorInstanceOrg = MEDAQLib.medaq_lib.CreateSensorInstance
