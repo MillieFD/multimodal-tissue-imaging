@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Black">
-    <option name="enabledOnReformat" value="true" />
-    <option name="enabledOnSave" value="true" />
-    <option name="executionMode" value="BINARY" />
-    <option name="pathToExecutable" value="/opt/homebrew/bin/black" />
-    <option name="sdkName" value="Raspberry Pi Python 3.11.2" />
+    <option name="sdkName" value="uv" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Raspberry Pi Python 3.11.2" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Docker Raspberry Pi (raspios-millie:latest)" project-jdk-type="Python SDK" />
 </project>
