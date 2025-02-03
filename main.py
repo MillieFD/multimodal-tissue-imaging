@@ -1,12 +1,14 @@
 # import asyncio
 # import thormotion
-import time
+# import time
 
-from RPi import GPIO
+from MEDAQLib import MEDAQLib, SENSOR_TYPE, ERR_CODE
+
+# from RPi import GPIO
 
 TARGET_SERIAL_NUMBER = "27266788"
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     # ocean_devs_manager = OceanDirectAPI()
     # _ = ocean_devs_manager.find_devices()  # Need to find devices before calling get_device_ids()
     # ids = ocean_devs_manager.get_device_ids()
@@ -31,35 +33,32 @@ if __name__ == '__main__':
 
     # -------------------------------------------
 
-    # confocal = MEDAQLib.CreateSensorInstance(SENSOR_TYPE.SENSOR_IFD2421)
-    # confocal.SetParameterString("IP_Interface", "TCP/IP")
-    # confocal.SetParameterString("IP_RemoteAddr", "169.254.168.150")
-    # confocal.SetParameterInt("IP_EnableLogging", 1)
-    # confocal.SetParameterInt("IP_AutomaticMode", 3)
-    # confocal.OpenSensor()
-    # if confocal.GetLastError() == ERR_CODE.NO_ERROR:
-    #     print("Successfully opened sensor instance")
-    #     data = confocal.Poll(1)
-    #     print("raw: {}, scaled: {}".format(data[0], data[1]))
-    #     confocal.CloseSensor()
-    # else:
-    #     print("Failed to open sensor instance")
-    # confocal.ReleaseSensorInstance()
+    confocal = MEDAQLib.CreateSensorInstance(SENSOR_TYPE.SENSOR_IFD2421)
+    confocal.SetParameterString("IP_Interface", "TCP/IP")
+    confocal.SetParameterString("IP_RemoteAddr", "169.254.168.150")
+    confocal.SetParameterInt("IP_EnableLogging", 1)
+    confocal.SetParameterInt("IP_AutomaticMode", 3)
+    confocal.OpenSensor()
+    if confocal.GetLastError() == ERR_CODE.NO_ERROR:
+        print("Successfully opened sensor instance")
+        data = confocal.Poll(1)
+        print("raw: {}, scaled: {}".format(data[0], data[1]))
+        confocal.CloseSensor()
+    else:
+        print("Failed to open sensor instance")
+    confocal.ReleaseSensorInstance()
 
     # -------------------------------------------
 
-    GPIO.setmode(GPIO.BCM)
-
-    RELAY_CH1 = 26  # GPIO26 (physical pin 37)
-    RELAY_CH2 = 20  # GPIO20 (physical pin 38)
-    RELAY_CH3 = 21  # GPIO21 (physical pin 40)
-
-    GPIO.setup(RELAY_CH1, GPIO.OUT)
-    GPIO.setup(RELAY_CH2, GPIO.OUT)
-    GPIO.setup(RELAY_CH3, GPIO.OUT)
-
-    GPIO.output(RELAY_CH1, GPIO.HIGH)
-    print("Relay Channel 1 is ON")
-    time.sleep(1)
-    GPIO.output(RELAY_CH1, GPIO.LOW)
-    print("Relay Channel 1 is OFF")
+    # GPIO.setmode(GPIO.BCM)
+    # RELAY_CH1 = 26  # GPIO26 (physical pin 37)
+    # RELAY_CH2 = 20  # GPIO20 (physical pin 38)
+    # RELAY_CH3 = 21  # GPIO21 (physical pin 40)
+    # GPIO.setup(RELAY_CH1, GPIO.OUT)
+    # GPIO.setup(RELAY_CH2, GPIO.OUT)
+    # GPIO.setup(RELAY_CH3, GPIO.OUT)
+    # GPIO.output(RELAY_CH1, GPIO.HIGH)
+    # print("Relay Channel 1 is ON")
+    # time.sleep(1)
+    # GPIO.output(RELAY_CH1, GPIO.LOW)
+    # print("Relay Channel 1 is OFF")
