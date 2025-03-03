@@ -5,7 +5,7 @@
     <option name="enabledOnSave" value="true" />
     <option name="executionMode" value="BINARY" />
     <option name="pathToExecutable" value="/opt/homebrew/bin/black" />
-    <option name="sdkName" value="Remote Python 3.13.2 Docker (milliepi-os-python:latest)" />
+    <option name="sdkName" value="Docker Python 3.13.2 (milliepi-os-python)" />
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="Docker Python 3.13.2 (milliepi-os-python)" project-jdk-type="Python SDK" />
 </project>
