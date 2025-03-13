@@ -1,0 +1,9 @@
+[project]
+name = "multimodal-tissue-imaging"
+version = "0.1.0"
+description = "Python scripts for multimodal tissue imaging experiments"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "thormotion>=0.3.0",
+]

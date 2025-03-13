@@ -1,0 +1,41 @@
+version = 1
+revision = 1
+requires-python = ">=3.13"
+
+[[package]]
+name = "multimodal-tissue-imaging"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "thormotion" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "thormotion", specifier = ">=0.3.0" }]
+
+[[package]]
+name = "thormotion"
+version = "0.3.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/0d/e3/d8172325b96df898c78a52c7ee0cc76cf63bb314f3c5cdbf89ca50beac9e/thormotion-0.3.0.tar.gz", hash = "sha256:a4bfd68d0e0386089f4ed70106b87fae64124c08bed9f8a40af9f4fdf2d6129a", size = 34032 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/75/b2/6726c7ba177ebe5bff21915dc2ffdfeaf76fcb134b4d90a8ab3f7bb0e9b5/thormotion-0.3.0-cp313-cp313-macosx_10_12_x86_64.whl", hash = "sha256:717336288b8634715725277309dd1d292e6c490f9dc974c6b2f9d08c63d93151", size = 531814 },
+    { url = "https://files.pythonhosted.org/packages/a4/c2/281efbd6fb55b465c718bf781d175f922624248a86ce19ac2539290de63a/thormotion-0.3.0-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:f07eab0632aac0be55d28586fdf61f58b1b613b0dc332ed85e030ffead395158", size = 519835 },
+    { url = "https://files.pythonhosted.org/packages/80/62/079fa337f226d976c961f490baa37c0035f8a10da1ae8768c21e35244d97/thormotion-0.3.0-cp313-cp313-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:9fc0c9cb8d63b1f3bea3ad3e96a67166e29c5602b9c25ccfd130ec2b5c05ed62", size = 486589 },
+    { url = "https://files.pythonhosted.org/packages/13/39/018a855443d24458de574bb624aba68a1286bce3679fab1c2c48469ebfa5/thormotion-0.3.0-cp313-cp313-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:a5c049452940465291ec8ce186d0e88984fa92030f28e9ff5e6010cbd73d437d", size = 475557 },
+    { url = "https://files.pythonhosted.org/packages/6d/1b/2f270d88ea65bd1990be1c0f8db3cdbe927170c91c866d473fa0edf35148/thormotion-0.3.0-cp313-cp313-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:769fcf2c3a0355954276288988621d332a6441f6cff8ed2baa3a1d2d4f943768", size = 557227 },
+    { url = "https://files.pythonhosted.org/packages/99/2c/4e447501cfc66503256b2d55ad6ff6321fa0d0f4a508671c11ea4b7063f8/thormotion-0.3.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:db771be195de0ccf3b767b499c2ab32aa94d3406ad0305ffad7374874e16598a", size = 510904 },
+    { url = "https://files.pythonhosted.org/packages/3b/76/60462ee8ca74efe83ecab76b68b0059676381f964e5148daeddae47601c1/thormotion-0.3.0-cp313-cp313-musllinux_1_2_aarch64.whl", hash = "sha256:ddb8731d063f6177300c879e4404fae6546e3f71cc9405b8b34be0d7679987e9", size = 754500 },
+    { url = "https://files.pythonhosted.org/packages/df/12/19efd7d08e0518ce6ffc5aef19174e74f51880d56f340329bcf83744473e/thormotion-0.3.0-cp313-cp313-musllinux_1_2_armv7l.whl", hash = "sha256:2625cc47f0dac48883ccc066969bf2e9b6acf2b160f2cac87fb39b677e1ce210", size = 853396 },
+    { url = "https://files.pythonhosted.org/packages/93/27/b39d877dac591fa49ddbf3f149a64cee00ba9082f24b4968669efbd8be2c/thormotion-0.3.0-cp313-cp313-musllinux_1_2_i686.whl", hash = "sha256:74da7b663cf1232be90c46fc7d0b512334c34fc7ee7496017f0f68a811c5d636", size = 795875 },
+    { url = "https://files.pythonhosted.org/packages/91/6f/4847ed5c1bb821ca294492779ac226492de6f46a2e8bb6e5d239140c429f/thormotion-0.3.0-cp313-cp313-musllinux_1_2_x86_64.whl", hash = "sha256:75aa6b2e2a7b172abd1cb8e389c63cd2d5b03637175b5af5ae5a055d9c4f2a29", size = 756984 },
+    { url = "https://files.pythonhosted.org/packages/2c/76/cbd6e989c6a88300ec4256364b339e0bc082d231ceabe7388f0de4d8862a/thormotion-0.3.0-cp313-cp313-win32.whl", hash = "sha256:2c785867b9098375197ef19ea57d1952dc3616097f57f2265a5d06e345d8d4b8", size = 400055 },
+    { url = "https://files.pythonhosted.org/packages/52/e1/9a0dd66c218d718d62c0e6a15c7dbf796a500b7b9d93a06bbd5754648a7d/thormotion-0.3.0-cp313-cp313-win_amd64.whl", hash = "sha256:94898ca1d2b15a1ac01d2e7f78cdd217f3898b363abcd4ff40bac8823074ffea", size = 430868 },
+    { url = "https://files.pythonhosted.org/packages/76/32/fb93515fabb512e7a40a70bcd774663d913b7567699a6ebeee8693e43b3d/thormotion-0.3.0-cp313-cp313t-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:2f530b6b6e2cfa31bfa35d479c96a40af4a284ee30fd6583de81edad2575a16a", size = 485821 },
+    { url = "https://files.pythonhosted.org/packages/c9/a2/2f18604360abd54b0ae579390a731d16df3a74914c1350f694b8d14e542a/thormotion-0.3.0-cp313-cp313t-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:90617f94c245aa8065743b35eed509acc697043dc0a074ff601eabbdcdc69a4c", size = 474466 },
+    { url = "https://files.pythonhosted.org/packages/3d/fd/5758ef34c43afb64aa9d2f707387396fea67a5a553ed7f7c1b9c57cd2f4a/thormotion-0.3.0-cp313-cp313t-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:635576aab0b3634f76ae4cba091dc2cce8867ae4b2e7f507de103c0252b859e8", size = 556743 },
+    { url = "https://files.pythonhosted.org/packages/f9/72/4484a790346b6bc1bf2fa54336904726b74bd5fe3a2ea5e36d36eb4fda24/thormotion-0.3.0-cp313-cp313t-musllinux_1_2_aarch64.whl", hash = "sha256:9ea5d24406a96df971eaf5da9b81a4ca976edca491ec3fb13e88690b9bc85f17", size = 754161 },
+    { url = "https://files.pythonhosted.org/packages/44/d6/53cdc41e94dc5b4b243258e3393e6b6d88c3072497f642a8eb1ee5e14437/thormotion-0.3.0-cp313-cp313t-musllinux_1_2_armv7l.whl", hash = "sha256:0e740ca1b74dfd8878ccf1e3f1f388f3a1e58a4f6e81357ec68de5fdb187d41b", size = 852501 },
+    { url = "https://files.pythonhosted.org/packages/ed/28/58afd625213fbeac6fb7d784c8d75e4b65b24fde132d3dd3f245e258f2f4/thormotion-0.3.0-cp313-cp313t-musllinux_1_2_i686.whl", hash = "sha256:d69bcadfdcc603b69f1240c130e11788f67da18998e21b997d5f60d8c0fd17b1", size = 795224 },
+    { url = "https://files.pythonhosted.org/packages/b9/21/33a698e8989f04c3a278a86a3764dfbb4c27ccf83935e5bfa780b29c5f7b/thormotion-0.3.0-cp313-cp313t-musllinux_1_2_x86_64.whl", hash = "sha256:9bce4fab0327e0c3dcc2c2e262b2c33aca0bcc467bf65db81057b077aa60c720", size = 755085 },
+]
